@@ -18,7 +18,6 @@ export const validateLeads = [
     .exists()
     .withMessage("Phone number is required")
     .trim()
-    .escape()
     .isNumeric()
     .withMessage("Phone number must be numeric")
     .matches(/^\+?[1-9]\d{9,13}$/)
@@ -29,8 +28,7 @@ export const validateLeads = [
     .withMessage("Email is required")
     .trim()
     .isEmail()
-    .withMessage("Please use a valid email")
-    .escape(),
+    .withMessage("Please use a valid email"),
   body("sector")
     .notEmpty()
     .exists()
@@ -42,12 +40,9 @@ export const validateLeads = [
       "Aviation & Flight",
       "Urban Mass Casualty",
     ])
-    .withMessage("Sector must be select from the list")
-
-    .escape(),
+    .withMessage("Sector must be select from the list"),
   body("other_information")
     .exists()
     .withMessage("Other information is required")
-    .trim()
-    .escape(),
+    .trim(),
 ];

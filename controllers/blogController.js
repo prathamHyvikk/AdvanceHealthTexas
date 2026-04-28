@@ -32,7 +32,7 @@ export const createBlog = async (req, res, next) => {
 
     res.status(201).json({
       status: "success",
-      msg: "Blog created successfully",
+      message: "Blog created successfully",
       blog,
     });
   } catch (error) {
@@ -46,7 +46,7 @@ export const getBlogs = async (req, res, next) => {
     const blogData = await Blog.find().lean();
     res.status(200).json({
       status: "success",
-      msg: "Blogs fetched successfully",
+      message: "Blogs fetched successfully",
       data: blogData,
     });
   } catch (error) {
