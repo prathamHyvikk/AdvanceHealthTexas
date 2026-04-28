@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { Leads } from "../models/leadModel.js";
 
 // fetch all leads
@@ -41,6 +42,31 @@ export const deleteLead = async (req, res, next) => {
     res
       .status(200)
       .json({ status: "success", message: "Lead deleted successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// update lead
+export const updateLead = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { name, phone, email, sector, other_information } = req.body;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      const err = new Error("Lead not found");
+      err.status = 400;
+      return next(err);
+    }
+
+    const lead = await Leads.findByIdAndUpdate(
+      id,
+      { name, phone, email, sector, other_information },
+      { new: true, runValidators: true },
+    );
+
+    res
+      .status(200)
+      .json({ status: "success", message: "Lead updated successfully" });
   } catch (error) {
     next(error);
   }
