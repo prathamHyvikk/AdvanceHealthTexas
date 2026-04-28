@@ -16,18 +16,23 @@ export const createBlog = async (req, res, next) => {
     const image = req.file ? req.file.filename : null;
     const slug = title.replaceAll(" ", "-");
 
-    const cleanHTML = (html) => {
-      return sanitizeHtml(html);
-    };
+    // const cleanHTML = (html) => {
+    //   return sanitizeHtml(html, {
+    //     allowedStyles: ["color", "background", "font-family", "font-size"],
+    //   });
+    // };
 
     const blog = await Blog.create({
       image,
       title,
       slug,
       short_description,
-      description: cleanHTML(description),
-      meta_description: cleanHTML(meta_description),
-      meta_schema: cleanHTML(meta_schema),
+      description,
+      meta_description,
+      meta_schema,
+      // description: cleanHTML(description),
+      // meta_description: cleanHTML(meta_description),
+      // meta_schema: cleanHTML(meta_schema),
     });
 
     res.status(201).json({
