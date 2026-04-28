@@ -9,8 +9,9 @@ import helmet from "helmet";
 import errorHandler from "./utils/errorHandler.js";
 dotenv.config();
 
-import leadRoute from "./routes/leadRoute.js";
-import blogRoute from "./routes/blogRoute.js";
+import leadRouter from "./routes/leadRoute.js";
+import blogRouter from "./routes/blogRoute.js";
+import adminRouter from "./routes/adminRoute.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -24,18 +25,21 @@ app.use(
     // allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
-app.use(helmet({
-  crossOriginResourcePolicy:{
-    policy:"cross-origin"
-  }
-}));
+app.use(
+  helmet({
+    crossOriginResourcePolicy: {
+      policy: "cross-origin",
+    },
+  }),
+);
 app.use(compression());
 app.use(morgan("combined"));
 app.use(express.static(path.join(path.resolve(), "public")));
 
 // Routes
-app.use("/api/leads", leadRoute);
-app.use("/api/blog", blogRoute);
+app.use("/api/leads", leadRouter);
+app.use("/api/blog", blogRouter);
+app.use("/api/admin", adminRouter);
 
 // Error Handler
 app.use(errorHandler);

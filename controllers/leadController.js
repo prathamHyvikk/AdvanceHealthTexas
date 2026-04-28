@@ -6,7 +6,7 @@ export const getLeads = async (req, res, next) => {
   try {
     const leadData = await Leads.find();
     res.status(200).json({
-      status: "success",
+      status: true,
       message: "Leads fetched successfully",
       data: leadData,
     });
@@ -28,7 +28,7 @@ export const postLead = async (req, res, next) => {
     });
     res
       .status(201)
-      .json({ status: "success", message: "Lead created successfully" });
+      .json({ status: true, message: "Lead created successfully" });
   } catch (error) {
     next(error);
   }
@@ -41,7 +41,7 @@ export const deleteLead = async (req, res, next) => {
     const lead = await Leads.findByIdAndDelete(id);
     res
       .status(200)
-      .json({ status: "success", message: "Lead deleted successfully" });
+      .json({ status: true, message: "Lead deleted successfully" });
   } catch (error) {
     next(error);
   }
@@ -66,7 +66,7 @@ export const updateLead = async (req, res, next) => {
 
     res
       .status(200)
-      .json({ status: "success", message: "Lead updated successfully" });
+      .json({ status: true, message: "Lead updated successfully" });
   } catch (error) {
     next(error);
   }

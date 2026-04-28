@@ -46,3 +46,31 @@ export const validateLeads = [
     .withMessage("Other information is required")
     .trim(),
 ];
+
+export const validateAdmin = [
+  body("fullName")
+    .notEmpty()
+    .exists()
+    .withMessage("fullName is required")
+    .trim()
+    .isLength({ min: 2 })
+    .withMessage("fullName must be at least 2 characters")
+    .isLength({ max: 50 })
+    .withMessage("fullName cannot exceed 50 characters")
+    .isAlpha()
+    .withMessage("fullName must contain only alphabetic characters")
+    .escape(),
+  body("email")
+    .notEmpty()
+    .exists()
+    .withMessage("Email is required")
+    .trim()
+    .isEmail()
+    .withMessage("Please use a valid email"),
+  body("password")
+    .notEmpty()
+    .exists()
+    .withMessage("Password is required")
+    .isLength({ min: 6 })
+    .withMessage("Password must be at least 6 characters"),
+];

@@ -36,7 +36,7 @@ export const createBlog = async (req, res, next) => {
     });
 
     res.status(201).json({
-      status: "success",
+      status: true,
       message: "Blog created successfully",
       blog,
     });
@@ -50,7 +50,7 @@ export const getBlogs = async (req, res, next) => {
   try {
     const blogData = await Blog.find().lean();
     res.status(200).json({
-      status: "success",
+      status: true,
       message: "Blogs fetched successfully",
       data: blogData,
     });
