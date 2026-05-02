@@ -45,11 +45,28 @@ export const adminSignin = async (req, res, next) => {
       return next(err);
     }
 
-    const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET);
-    res.cookie("token", token, { httpOnly: true, secure: true , });
+    const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
+    console.log(token);
 
-    res.status(200).json({ status: true, message: "Admin logged in" });
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "Lax",
+      maxAge: 1000 * 60 * 60 * 24,
+    });
+
+    res.json({ status: true, message: "Admin logged in" });
   } catch (error) {
     next(error);
   }
+};
+
+export const verifyAdmin = async (req, res) => {
+  res.status(200).json({
+    status: true,
+    message: "Admin verified",
+    admin: req.admin,
+  });
 };
