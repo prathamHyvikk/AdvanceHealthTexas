@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  adminLogout,
   adminSignin,
   createAdmin,
   verifyAdmin,
@@ -13,5 +14,6 @@ const router = express.Router();
 router.post("/signup", validateAdmin, validate, createAdmin);
 router.post("/signin", adminSignin);
 router.post("/verify", authenticateAdmin, verifyAdmin);
+router.get("/signout", adminLogout);
 
 export default router;

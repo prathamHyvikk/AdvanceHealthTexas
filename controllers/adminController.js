@@ -57,7 +57,7 @@ export const adminSignin = async (req, res, next) => {
       maxAge: 1000 * 60 * 60 * 24,
     });
 
-    res.json({ status: true, message: "Admin logged in" });
+    res.status(200).json({ status: true, message: "Admin logged in" });
   } catch (error) {
     next(error);
   }
@@ -69,4 +69,9 @@ export const verifyAdmin = async (req, res) => {
     message: "Admin verified",
     admin: req.admin,
   });
+};
+
+export const adminLogout = (req, res) => {
+  res.clearCookie("token");
+  res.status(200).json({ status: true, message: "Admin logged out" });
 };
