@@ -10,7 +10,7 @@ export const validateLeads = [
     .withMessage("Name must be at least 2 characters")
     .isLength({ max: 50 })
     .withMessage("Name cannot exceed 50 characters")
-    .isAlpha()
+    .matches(/^[A-Za-z ]+$/)
     .withMessage("Name must contain only alphabetic characters")
     .escape(),
   body("phone")
@@ -57,7 +57,7 @@ export const validateAdmin = [
     .withMessage("fullName must be at least 2 characters")
     .isLength({ max: 50 })
     .withMessage("fullName cannot exceed 50 characters")
-    .isAlpha()
+    .matches(/^[A-Za-z ]+$/)
     .withMessage("fullName must contain only alphabetic characters")
     .escape(),
   body("email")
