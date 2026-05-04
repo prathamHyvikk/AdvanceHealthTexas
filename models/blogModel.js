@@ -22,11 +22,13 @@ const blogSchema = new mongoose.Schema({
     required: [true, "Description is required"],
   },
   meta_description: {
-    type: String,
+    type: Object,
+    default: {},
     // required: [true, "Meta description is required"],
   },
   meta_schema: {
-    type: String,
+    type: Object,
+    default: {},
     // required: [true, "Meta schema is required"],
   },
 });
