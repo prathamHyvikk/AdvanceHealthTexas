@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Basic reset for email clients */
+       
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'poppins', sans-serif;
             background-color: #f2f4f7;
             color: #202048;
         }
@@ -76,6 +76,13 @@
             margin-top: 10px;
         }
 
+        .flex {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+        }
+
         .divider {
             border-top: 1px solid #e5e7eb;
             margin: 20px 0;
@@ -87,9 +94,11 @@
         <table class="main">
             <!-- Brand Header -->
             <tr>
-                <td class="header">
-                    <h1 style="color: #ffffff; margin: 0; font-size: 24px;">New Lead Alert</h1>
-                    <p style="color: #c43262; margin: 5px 0 0 0; font-weight: bold;">Priority Notification</p>
+                <td class="header flex">
+                    
+                    <h1 style="color: #ffffff; margin: 0; font-size: 24px;">Advance Health <span style="color: #e81050;">Texas</span></h1>
+
+
                 </td>
             </tr>
 
@@ -101,43 +110,49 @@
                         A new business inquiry has been submitted through your website. Here are the details:
                     </p>
 
-                    <table width="100%">
-                        <tr>
-                            <td>
-                                <div class="label">Full Name</div>
-                                <div class="value">
-                                    <%= name %>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="label">Email Address</div>
-                                <div class="value"><a href="mailto:<%= email %>"
-                                        style="color: #e81050; text-decoration: none;">
-                                        <%= email %>
-                                    </a></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="label">Phone Number</div>
-                                <div class="value">
-                                    <%= phone %>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="divider"></div>
-                                <div class="label">Message / Other Information</div>
-                                <div class="value"
-                                    style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #a82040; ">
-                                    "<%= other_information %>"
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%;">
+
+                        <div>
+                            <div class="label">Full Name</div>
+                            <div class="value">
+                                <%= name %>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="label">Email Address</div>
+                            <div class="value">
+                                <a href="mailto:raj@gmail.com" style="color: #e81050; text-decoration: none;">
+                                    <%= email %>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="label">Phone Number</div>
+                            <div class="value">
+                                <%= phone %>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="label">Sector</div>
+                            <div class="value">
+                                <%= sector %>
+                            </div>
+                        </div>
+
+                        <!-- Full width row -->
+                        <div style="grid-column: span 2;">
+                            <div class="divider"></div>
+                            <div class="label">Message / Other Information</div>
+                            <div class="value"
+                                style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #a82040;">
+                                "<%= other_information %>"
+                            </div>
+                        </div>
+
+                    </div>
 
                     <!-- <center style="margin-top: 30px;">
                         <a href="https://advancehealthtexas.vercel.app/admin/dashboard/leads" class="button">View in Dashboard</a>
