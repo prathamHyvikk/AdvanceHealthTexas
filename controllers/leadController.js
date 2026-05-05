@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { Leads } from "../models/leadModel.js";
+import sendMail from "../utils/sendMail.js";
 
 // fetch all leads
 export const getLeads = async (req, res, next) => {
@@ -26,6 +27,19 @@ export const postLead = async (req, res, next) => {
       sector,
       other_information,
     });
+
+    await sendMail({
+      to: "Pratham@hyvikk.com",
+      subject: "New Lead Generated ",
+      data: {
+        name,
+        phone,
+        email,
+        sector,
+        other_information,
+      },
+    });
+
     res
       .status(201)
       .json({ status: true, message: "Lead created successfully" });

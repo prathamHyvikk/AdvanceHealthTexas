@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Basic reset for email clients */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f2f4f7;
+            color: #202048;
+        }
+
+        .wrapper {
+            width: 100%;
+            table-layout: fixed;
+            background-color: #f2f4f7;
+            padding-bottom: 40px;
+        }
+
+        .main {
+            background-color: #ffffff;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 600px;
+            border-spacing: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .header {
+            background-color: #202048;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .footer {
+            padding: 20px;
+            text-align: center;
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        .label {
+            color: #6b7280;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .value {
+            color: #181838;
+            font-size: 16px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .button {
+            background-color: #e81050;
+            color: #ffffff !important;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .divider {
+            border-top: 1px solid #e5e7eb;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <center class="wrapper">
+        <table class="main">
+            <!-- Brand Header -->
+            <tr>
+                <td class="header">
+                    <h1 style="color: #ffffff; margin: 0; font-size: 24px;">New Lead Alert</h1>
+                    <p style="color: #c43262; margin: 5px 0 0 0; font-weight: bold;">Priority Notification</p>
+                </td>
+            </tr>
+
+            <!-- Body Content -->
+            <tr>
+                <td class="content">
+                    <p style="font-size: 16px; line-height: 1.5; margin-bottom: 30px;">
+                        Hello Admin, <br>
+                        A new business inquiry has been submitted through your website. Here are the details:
+                    </p>
+
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <div class="label">Full Name</div>
+                                <div class="value">
+                                    <%= name %>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="label">Email Address</div>
+                                <div class="value"><a href="mailto:<%= email %>"
+                                        style="color: #e81050; text-decoration: none;">
+                                        <%= email %>
+                                    </a></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="label">Phone Number</div>
+                                <div class="value">
+                                    <%= phone %>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="divider"></div>
+                                <div class="label">Message / Other Information</div>
+                                <div class="value"
+                                    style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #a82040; ">
+                                    "<%= other_information %>"
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- <center style="margin-top: 30px;">
+                        <a href="https://advancehealthtexas.vercel.app/admin/dashboard/leads" class="button">View in Dashboard</a>
+                    </center> -->
+                </td>
+            </tr>
+
+            <!-- Footer -->
+            <!-- <tr>
+                <td class="footer">
+                    &copy; 2026 Advance Health Texas. All rights reserved.<br>
+                    This is an automated system notification.
+                </td>
+            </tr> -->
+        </table>
+    </center>
+</body>
+</html>

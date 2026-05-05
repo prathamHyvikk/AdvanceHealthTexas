@@ -40,6 +40,7 @@ app.use(
 // );
 app.use(compression());
 app.use(morgan("combined"));
+app.set("view engine", "ejs");
 app.use(express.static(path.join(path.resolve(), "public")));
 
 app.get("/", (req, res) => {
