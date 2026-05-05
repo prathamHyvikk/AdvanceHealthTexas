@@ -12,7 +12,7 @@ import authenticateAdmin from "../middlewares/authenticateAdmin.js";
 const router = express.Router();
 
 router.get("/",authenticateAdmin, getLeads);
-router.post("/",authenticateAdmin, validateLeads, validate, postLead);
+router.post("/", validateLeads, validate, postLead);
 router.put("/:id",authenticateAdmin, validateLeads, validate, updateLead);
 router.delete("/:id",authenticateAdmin, deleteLead);
 
