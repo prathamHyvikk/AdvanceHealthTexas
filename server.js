@@ -8,11 +8,12 @@ import compression from "compression";
 import helmet from "helmet";
 import errorHandler from "./utils/errorHandler.js";
 dotenv.config();
+import cookieParser from "cookie-parser";
 
 import leadRouter from "./routes/leadRoute.js";
 import blogRouter from "./routes/blogRoute.js";
 import adminRouter from "./routes/adminRoute.js";
-import cookieParser from "cookie-parser";
+import categoryRouter from "./routes/categoryRoute.js";
 
 const app = express();
 app.use(cookieParser());
@@ -50,6 +51,7 @@ app.get("/", (req, res) => {
 app.use("/api/leads", leadRouter);
 app.use("/api/blog", blogRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/category", categoryRouter);
 
 // Error Handler
 app.use(errorHandler);

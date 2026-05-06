@@ -6,7 +6,7 @@ import path from "path";
 // fetch all blogs for backend
 export const getBlogs = async (req, res, next) => {
   try {
-    const blogData = await Blog.find().lean();
+    const blogData = await Blog.find().lean().populate("category");
     res.status(200).json({
       status: true,
       message: "Blogs fetched successfully",
@@ -21,7 +21,14 @@ export const getBlogs = async (req, res, next) => {
 export const getBlogList = async (req, res, next) => {
   try {
     const blogData = await Blog.find()
-      .select({ image: 1, title: 1, slug: 1, short_description: 1 })
+      .select({
+        image: 1,
+        title: 1,
+        slug: 1,
+        short_description: 1,
+        _id: 1,
+        category: 1,
+      })
       .lean();
     res.status(200).json({
       status: true,
@@ -38,6 +45,7 @@ export const createBlog = async (req, res, next) => {
   try {
     const {
       title,
+      category,
       short_description,
       description,
       meta_description,
@@ -54,6 +62,7 @@ export const createBlog = async (req, res, next) => {
       image,
       title,
       slug,
+      category,
       short_description,
       description,
       meta_description: parsedMetaDescription,
@@ -84,6 +93,7 @@ export const updateBlog = async (req, res, next) => {
 
     const {
       title,
+      category,
       short_description,
       description,
       meta_description,
@@ -119,6 +129,7 @@ export const updateBlog = async (req, res, next) => {
         image,
         title,
         slug,
+        category,
         short_description,
         description,
         meta_description: parsedMetaDescription,
