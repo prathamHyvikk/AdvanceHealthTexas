@@ -151,7 +151,7 @@ export const updateBlog = async (req, res, next) => {
     const slug = slugify(title, {
       lower: true,
       replacement: "-",
-      remove: /[*+~.()'"!:,@]/g,
+      remove: /[*+~.()'"!:?,@]/g,
     });
 
     await Blog.findByIdAndUpdate(
