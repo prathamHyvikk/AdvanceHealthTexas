@@ -2,6 +2,7 @@ import { Blog } from "../models/blogModel.js";
 import sanitizeHtml from "sanitize-html";
 import fs from "fs";
 import path from "path";
+import slugify from "slugify";
 
 // fetch all blogs for backend
 export const getBlogs = async (req, res, next) => {
@@ -77,7 +78,11 @@ export const createBlog = async (req, res, next) => {
 
     // multer gives
     const image = req.file ? req.file.filename : req.body.existingImage || null;
-    const slug = title.replaceAll(" ", "-");
+    const slug = slugify(title, {
+      lower: true,
+      replacement: "-",
+      remove: /[*+~.()'"!:@]/g,
+    });
 
     const parsedSchema = JSON.parse(meta_schema);
     const parsedMetaDescription = JSON.parse(meta_description);
@@ -143,8 +148,11 @@ export const updateBlog = async (req, res, next) => {
       // Set new image
       image = req.file.filename;
     }
-
-    const slug = title.replaceAll(" ", "-");
+    const slug = slugify(title, {
+      lower: true,
+      replacement: "-",
+      remove: /[*+~.()'"!:,@]/g,
+    });
 
     await Blog.findByIdAndUpdate(
       id,
