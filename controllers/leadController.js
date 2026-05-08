@@ -5,11 +5,21 @@ import sendMail from "../utils/sendMail.js";
 // fetch all leads
 export const getLeads = async (req, res, next) => {
   try {
-    const leadData = await Leads.find();
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
+
+    const skipIndex = (page - 1) * limit;
+
+    const [leadData, totalLeads] = await Promise.all([
+      Leads.find().skip(skipIndex).limit(limit).lean(),
+      Leads.countDocuments(),
+    ]);
+
     res.status(200).json({
       status: true,
       message: "Leads fetched successfully",
       data: leadData,
+      totalLeads,
     });
   } catch (error) {
     next(error);

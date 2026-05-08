@@ -6,11 +6,21 @@ import path from "path";
 // fetch all blogs for backend
 export const getBlogs = async (req, res, next) => {
   try {
-    const blogData = await Blog.find().lean().populate("category");
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 2;
+
+    const skipIndex = (page - 1) * limit;
+
+    const [blogData, totalBlogs] = await Promise.all([
+      Blog.find().skip(skipIndex).limit(limit).lean().populate("category"),
+      Blog.countDocuments(),
+    ]);
+
     res.status(200).json({
       status: true,
       message: "Blogs fetched successfully",
       data: blogData,
+      totalBlogs,
     });
   } catch (error) {
     next(error);
@@ -20,20 +30,33 @@ export const getBlogs = async (req, res, next) => {
 // Blog list for frontEnd
 export const getBlogList = async (req, res, next) => {
   try {
-    const blogData = await Blog.find()
-      .select({
-        image: 1,
-        title: 1,
-        slug: 1,
-        short_description: 1,
-        _id: 1,
-        category: 1,
-      })
-      .lean();
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
+
+    const skipIndex = (page - 1) * limit;
+
+    const [blogData, totalBlogs] = await Promise.all([
+      Blog.find()
+        .skip(skipIndex)
+        .limit(limit)
+        .select({
+          image: 1,
+          title: 1,
+          slug: 1,
+          short_description: 1,
+          _id: 1,
+          category: 1,
+        })
+        .lean()
+        .populate("category"),
+      Blog.countDocuments(),
+    ]);
+
     res.status(200).json({
       status: true,
       message: "Blogs fetched successfully",
       data: blogData,
+      totalBlogs,
     });
   } catch (error) {
     next(error);
