@@ -32,6 +32,10 @@ const blogSchema = new mongoose.Schema(
       default: {},
       // required: [true, "Meta schema is required"],
     },
+    status: {
+      type: String,
+      default: "published",
+    },
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",

@@ -37,7 +37,7 @@ export const getBlogList = async (req, res, next) => {
     const skipIndex = (page - 1) * limit;
 
     const [blogData, totalBlogs] = await Promise.all([
-      Blog.find()
+      Blog.find({ status: "published" })
         .skip(skipIndex)
         .limit(limit)
         .select({
@@ -51,7 +51,7 @@ export const getBlogList = async (req, res, next) => {
         })
         .lean()
         .populate("category"),
-      Blog.countDocuments(),
+      Blog.countDocuments({ status: "published" }),
     ]);
 
     res.status(200).json({
@@ -71,6 +71,7 @@ export const createBlog = async (req, res, next) => {
     const {
       title,
       category,
+      status,
       short_description,
       description,
       meta_description,
@@ -123,6 +124,7 @@ export const updateBlog = async (req, res, next) => {
     const {
       title,
       category,
+      status,
       short_description,
       description,
       meta_description,
@@ -162,6 +164,7 @@ export const updateBlog = async (req, res, next) => {
         title,
         slug,
         category,
+        status,
         short_description,
         description,
         meta_description: parsedMetaDescription,
