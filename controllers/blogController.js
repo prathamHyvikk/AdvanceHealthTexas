@@ -43,6 +43,7 @@ export const getBlogList = async (req, res, next) => {
     const limit = Number(req.query.limit) || 10;
 
     const skipIndex = (page - 1) * limit;
+    const currentTime = new Date();
 
     const [blogData, totalBlogs] = await Promise.all([
       Blog.find({ status: "published", publishingDate: { $lte: currentTime } })
@@ -171,7 +172,6 @@ export const updateBlog = async (req, res, next) => {
 
     let finalPublishingDate = publishingDate;
 
-  
     if (status === "published") {
       finalPublishingDate = new Date();
     } else if (status === "draft") {

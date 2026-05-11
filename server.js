@@ -24,10 +24,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: [
+      "https://advancehealthtexas.vercel.app",
       "http://localhost:5173",
       "http://192.168.0.39:5173",
       "http://192.168.0.13:5173",
-      "https://advancehealthtexas.vercel.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
