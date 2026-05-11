@@ -32,8 +32,13 @@ const blogSchema = new mongoose.Schema(
       default: {},
       // required: [true, "Meta schema is required"],
     },
+    publishingDate: {
+      type: Date,
+      default: Date.now,
+    },
     status: {
       type: String,
+      enum: ["published", "draft", "scheduled"],
       default: "published",
     },
     category: {

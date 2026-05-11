@@ -11,6 +11,14 @@ export const getBlogs = async (req, res, next) => {
     const limit = Number(req.query.limit) || 2;
 
     const skipIndex = (page - 1) * limit;
+    const currentTime = new Date();
+    await Blog.updateMany(
+      {
+        status: "scheduled",
+        publishingDate: { $lte: currentTime },
+      },
+      { $set: { status: "published" } },
+    );
 
     const [blogData, totalBlogs] = await Promise.all([
       Blog.find().skip(skipIndex).limit(limit).lean().populate("category"),
@@ -37,7 +45,7 @@ export const getBlogList = async (req, res, next) => {
     const skipIndex = (page - 1) * limit;
 
     const [blogData, totalBlogs] = await Promise.all([
-      Blog.find({ status: "published" })
+      Blog.find({ status: "published", publishingDate: { $lte: currentTime } })
         .skip(skipIndex)
         .limit(limit)
         .select({
@@ -72,6 +80,7 @@ export const createBlog = async (req, res, next) => {
       title,
       category,
       status,
+      publishingDate,
       short_description,
       description,
       meta_description,
@@ -93,6 +102,8 @@ export const createBlog = async (req, res, next) => {
       title,
       slug,
       category,
+      status,
+      publishingDate,
       short_description,
       description,
       meta_description: parsedMetaDescription,
@@ -125,6 +136,7 @@ export const updateBlog = async (req, res, next) => {
       title,
       category,
       status,
+      publishingDate,
       short_description,
       description,
       meta_description,
@@ -157,6 +169,15 @@ export const updateBlog = async (req, res, next) => {
       remove: /[*+~.()'"!:?,@]/g,
     });
 
+    let finalPublishingDate = publishingDate;
+
+  
+    if (status === "published") {
+      finalPublishingDate = new Date();
+    } else if (status === "draft") {
+      finalPublishingDate = new Date();
+    }
+
     await Blog.findByIdAndUpdate(
       id,
       {
@@ -165,6 +186,7 @@ export const updateBlog = async (req, res, next) => {
         slug,
         category,
         status,
+        publishingDate: finalPublishingDate || publishingDate,
         short_description,
         description,
         meta_description: parsedMetaDescription,
