@@ -46,6 +46,7 @@ export const getBlogList = async (req, res, next) => {
           slug: 1,
           short_description: 1,
           _id: 1,
+          createdAt: 1,
           category: 1,
         })
         .lean()
