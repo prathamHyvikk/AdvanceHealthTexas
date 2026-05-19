@@ -26,7 +26,7 @@ app.use(
     origin: [
       "https://advancehealthtexas.vercel.app",
       "http://localhost:5173",
-      "http://192.168.0.39:5173",
+      "http://192.168.0.39:3000",
       "http://192.168.0.13:3000",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],

@@ -29,22 +29,22 @@ export const validateLeads = [
     .trim()
     .isEmail()
     .withMessage("Please use a valid email"),
-  body("sector")
+  body("injury")
     .notEmpty()
     .exists()
-    .withMessage("Sector is required")
+    .withMessage("injury is required")
     .trim()
     .isIn([
-      "Highway Accidents",
-      "Industrial & Oil Rig",
-      "Aviation & Flight",
-      "Urban Mass Casualty",
+      "Whiplash",
+      "Spinal Trauma",
+      "Orthoepdic",
+      "Concussion",
+      "Muscle Soreness",
+      "Headaches",
+      "Other",
     ])
-    .withMessage("Sector must be select from the list"),
-  body("other_information")
-    .exists()
-    .withMessage("Other information is required")
-    .trim(),
+    .withMessage("injury must be select from the list"),
+  body("how_help").exists().withMessage("How can we help is required").trim(),
 ];
 
 export const validateAdmin = [

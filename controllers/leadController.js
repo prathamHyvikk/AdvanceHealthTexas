@@ -29,13 +29,13 @@ export const getLeads = async (req, res, next) => {
 // create lead
 export const postLead = async (req, res, next) => {
   try {
-    const { name, phone, email, sector, other_information } = req.body;
+    const { name, phone, email, injury, how_help } = req.body;
     const lead = await Leads.create({
       name,
       phone,
       email,
-      sector,
-      other_information,
+      injury,
+      how_help,
     });
 
     await sendMail({
@@ -45,8 +45,8 @@ export const postLead = async (req, res, next) => {
         name,
         phone,
         email,
-        sector,
-        other_information,
+        injury,
+        how_help,
       },
     });
 
@@ -75,7 +75,7 @@ export const deleteLead = async (req, res, next) => {
 export const updateLead = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { name, phone, email, sector, other_information } = req.body;
+    const { name, phone, email, injury, how_help } = req.body;
     if (!mongoose.Types.ObjectId.isValid(id)) {
       const err = new Error("Lead not found");
       err.status = 400;
@@ -84,7 +84,7 @@ export const updateLead = async (req, res, next) => {
 
     const lead = await Leads.findByIdAndUpdate(
       id,
-      { name, phone, email, sector, other_information },
+      { name, phone, email, injury, how_help },
       { new: true, runValidators: true },
     );
 

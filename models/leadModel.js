@@ -10,10 +10,18 @@ const leadSchema = new mongoose.Schema(
       maxlength: [50, "Name cannot exceed 50 characters"],
     },
 
+    doa: {
+      type: Date,
+      required: [true, "Date of Accident is required"],
+    },
+
     phone: {
       type: String,
       required: [true, "Phone number is required"],
-      match: [/^\+?[1-9]\d{9,13}$/, "Phone must be at least 10 digits and maximum 14 digits"],
+      match: [
+        /^\+?[1-9]\d{9,13}$/,
+        "Phone must be at least 10 digits and maximum 14 digits",
+      ],
     },
 
     email: {
@@ -24,18 +32,21 @@ const leadSchema = new mongoose.Schema(
       match: [/^\S+@\S+\.\S+$/, "Please use a valid email"],
     },
 
-    sector: {
+    injury: {
       type: String,
-      required: [true, "Sector is required"],
+      required: [true, "Type of Injury/Primary Concern is required"],
       enum: [
-        "Highway Accidents",
-        "Industrial & Oil Rig",
-        "Aviation & Flight",
-        "Urban Mass Casualty",
+        "Whiplash",
+        "Spinal Trauma",
+        "Orthoepdic",
+        "Concussion",
+        "Muscle Soreness",
+        "Headaches",
+        "Other",
       ],
     },
 
-    other_information: {
+    how_help: {
       type: String,
       maxlength: [500, "Max 500 characters allowed"],
       trim: true,
