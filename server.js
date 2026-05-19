@@ -17,7 +17,7 @@ import categoryRouter from "./routes/categoryRoute.js";
 
 const app = express();
 app.use(cookieParser());
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -27,7 +27,7 @@ app.use(
       "https://advancehealthtexas.vercel.app",
       "http://localhost:5173",
       "http://192.168.0.39:5173",
-      "http://192.168.0.13:5173",
+      "http://192.168.0.13:3000",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
